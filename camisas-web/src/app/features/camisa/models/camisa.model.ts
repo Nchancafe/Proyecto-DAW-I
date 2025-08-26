@@ -13,15 +13,13 @@ export interface Camisa {
 }
 
 export interface ApiResponseCamisa {
-  data: {
-    contenido: Camisa[];
-    paginaActual: number;
-    tamanio: number;
-    totalElementos: number;
-    totalPaginas: number;
-    primera: boolean;
-    ultima: boolean;
-    vacia: boolean;
-  };
+  contenido: Camisa[];
+  paginaActual: number;
+  tamanio: number;
+  totalElementos: number;
+  totalPaginas: number;
+  primera: boolean;
+  ultima: boolean;
+  vacia: boolean;
 }
 

@@ -46,26 +46,19 @@ export class AuthService {
    *
    * @param credentials
    */
+
   signIn(credentials: { username: string; password: string }): Observable<any> {
-    // Throw error if the user is already logged in
     if (this._authenticated) {
       return throwError(() => new Error('El usuario ya ha iniciado sesión.'));
     }
 
     return this._httpClient.post(`${this.baseUrl}/public/api/auth/login`, credentials).pipe(
       switchMap((response: any) => {
-        // Store the access token and refresh token in local storage
-        this.accessToken = response.data.accessToken;
-        this.refreshToken = response.data.refreshToken;
-
-        // Set the authenticated flag to true
+        this.accessToken = response.accessToken;
+        this.refreshToken = response.refreshToken;
         this._authenticated = true;
-
-        // Start the token refresh timer
         this.startTokenRefreshTimer();
-
-        // Return a new observable with the response
-        return of(response.data);
+        return of(response);
       }),
     );
   }

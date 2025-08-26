@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CamisaController {
 
-//    private final CamisaService camisaService;
-//
-//    @GetMapping
-//    public ResponseEntity<PaginaResult<CamisaModel>> listarCamisas(
-//            @RequestParam(defaultValue = "0") int pagina,
-//            @RequestParam(defaultValue = "10") int tamanio,
-//            @RequestParam(defaultValue = "id") String ordenarPor,
-//            @RequestParam(defaultValue = "asc") String direccion) {
-//
-//        PaginacionRequest paginacion = PaginacionRequest.builder()
-//                .pagina(pagina)
-//                .tamanio(tamanio)
-//                .ordenarPor(ordenarPor)
-//                .direccion(direccion)
-//                .build();
-//
-//        PaginaResult<CamisaModel> resultado = camisaService.listarCamisas(paginacion);
-//        return ResponseEntity.ok(resultado);
-//    }
+    private final CamisaService camisaService;
+
+    @GetMapping
+    public ResponseEntity<PaginaResult<CamisaModel>> listarCamisas(
+            @RequestParam(defaultValue = "0") int pagina,
+            @RequestParam(defaultValue = "10") int tamanio,
+            @RequestParam(defaultValue = "id") String ordenarPor,
+            @RequestParam(defaultValue = "asc") String direccion) {
+
+        PaginacionRequest paginacion = PaginacionRequest.builder()
+                .pagina(pagina)
+                .tamanio(tamanio)
+                .ordenarPor(ordenarPor)
+                .direccion(direccion)
+                .build();
+
+        PaginaResult<CamisaModel> resultado = camisaService.listarCamisas(paginacion);
+        return ResponseEntity.ok(resultado);
+    }
 }

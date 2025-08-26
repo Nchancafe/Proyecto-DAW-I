@@ -15,6 +15,7 @@ public class EstanteEntity extends Auditoria<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_estante")
     private Long id;
 
     @Column(length = 10, nullable = false)
