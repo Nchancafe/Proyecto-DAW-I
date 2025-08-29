@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="188c04ad-6aa0-47f0-91c8-43184f25bcef" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/cibertec/backend/domain/marca/repository/MarcaRepository.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/cibertec/backend/domain/marca/service/MarcaService.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../backend/src/main/java/com/cibertec/backend/domain/marca/service/MarcaServiceImpl.java" afterDir="false" />
@@ -59,24 +60,44 @@
       <change beforePath="$PROJECT_DIR$/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/features/camisa/services/camisa.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/features/camisa/services/camisa.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/layout/components/main-layout/main-layout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/components/main-layout/main-layout.ts" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.angular/cache/20.2.0/camisas-web/.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/20.2.0/camisas-web/.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/20.2.0/camisas-web/vite/com.chrome.devtools.json" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/20.2.0/camisas-web/vite/com.chrome.devtools.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/core/dto/usuario.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/dto/usuario.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/features/perfil-usuario/components/usuario/perfil-usuario.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/features/perfil-usuario/components/usuario/perfil-usuario.component.ts" afterDir="false" />
+>>>>>>> miguel
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+<<<<<<< HEAD
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$/.." value="nayeli" />
       </map>
     </option>
+=======
+>>>>>>> miguel
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="31ctoQNlQiu22A5T18UAPJvIdwR" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -85,10 +106,17 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+<<<<<<< HEAD
     "git-widget-placeholder": "nayeli",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "C:/DAW I/Proyecto-DAW-I/camisas-web",
+=======
+    "git-widget-placeholder": "miguel",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/Miguel/Downloads/Proyectos Angular/PFinal/Proyecto-DAW-I/camisas-web/public/images",
+>>>>>>> miguel
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -96,15 +124,23 @@
     "nodejs_package_manager_path": "npm",
     "npm.Angular CLI Server.executor": "Run",
     "to.speed.mode.migration.done": "true",
+<<<<<<< HEAD
     "ts.external.directory.path": "C:\\DAW I\\Proyecto-DAW-I\\camisas-web\\node_modules\\typescript\\lib",
+=======
+    "ts.external.directory.path": "C:\\Users\\Miguel\\Downloads\\Proyectos Angular\\PFinal\\Proyecto-DAW-I\\camisas-web\\node_modules\\typescript\\lib",
+>>>>>>> miguel
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Miguel\Downloads\Proyectos Angular\PFinal\Proyecto-DAW-I\camisas-web\public\images" />
       <recent name="C:\DAW I\mi-proyecto\camisas-web\src\app\features\camisa\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Miguel\Downloads\Proyectos Angular\PFinal\Proyecto-DAW-I\camisas-web\public" />
+      <recent name="C:\Users\Miguel\Downloads\Proyectos Angular\PFinal\Proyecto-DAW-I\camisas-web\src\assets" />
+      <recent name="C:\Users\Miguel\Downloads\Proyectos Angular\PFinal\Proyecto-DAW-I\camisas-web\src\app\features\perfil-usuario\components\usuario" />
       <recent name="C:\DAW I\mi-proyecto\camisas-web\src\app\features\camisa\components\camisa" />
     </key>
   </component>
@@ -139,8 +175,12 @@
       <updated>1755835362579</updated>
       <workItem from="1755835363783" duration="1069000" />
       <workItem from="1755917788946" duration="2500000" />
+<<<<<<< HEAD
       <workItem from="1756445910529" duration="274000" />
       <workItem from="1756446427346" duration="3978000" />
+=======
+      <workItem from="1756468600970" duration="13239000" />
+>>>>>>> miguel
     </task>
     <servers />
   </component>

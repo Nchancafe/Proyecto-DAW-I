@@ -1,6 +1,11 @@
 {
   "workspace": {
+<<<<<<< HEAD
     "root": "C:\\DAW I\\Proyecto-DAW-I\\camisas-web",
     "uuid": "658c9409-4f82-4839-b5a9-cd77559249c3"
+=======
+    "root": "C:\\Users\\Miguel\\Downloads\\Proyectos Angular\\PFinal\\Proyecto-DAW-I\\camisas-web",
+    "uuid": "9c57921a-5169-436a-9600-93cba1976783"
+>>>>>>> miguel
   }
 }

@@ -4,6 +4,14 @@ import {Observable, throwError, switchMap, of, catchError} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {AuthUtils} from './auth.utils';
 
+interface UserData {
+  roles: string[];
+  name: string;
+  sub: string;
+  iat: number;
+  exp: number;
+}
+
 @Injectable({providedIn: 'root'})
 export class AuthService {
   private _authenticated: boolean = false;
@@ -126,6 +134,97 @@ export class AuthService {
 
     return of(true);
   }
+
+  // -----------------------------------------------------------------------------------------------------
+  // @ User Data Methods - NUEVOS MÉTODOS AGREGADOS
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Decodificar JWT manualmente
+   */
+  private decodeJWT(token: string): UserData | null {
+    try {
+      const payload = token.split('.')[1];
+      const decodedPayload = atob(payload);
+      return JSON.parse(decodedPayload);
+    } catch (error) {
+      console.error('Error decodificando JWT:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Obtener datos del usuario desde el token
+   */
+  getUserFromToken(): UserData | null {
+    const token = this.accessToken;
+    if (token) {
+      return this.decodeJWT(token);
+    }
+    return null;
+  }
+
+  /**
+   * Obtener nombre del usuario
+   */
+  getUserName(): string {
+    const userData = this.getUserFromToken();
+    return userData?.name || userData?.sub || 'Usuario';
+  }
+
+  /**
+   * Obtener rol principal del usuario
+   */
+  getUserRole(): string {
+    const userData = this.getUserFromToken();
+    if (!userData?.roles || userData.roles.length === 0) {
+      return 'Usuario';
+    }
+
+    // Mapear roles a nombres más amigables
+    const roleMap: { [key: string]: string } = {
+      'ADMIN': 'Administrador',
+      'RRHH': 'Recursos Humanos',
+      'USER': 'Usuario',
+      'MANAGER': 'Gerente'
+    };
+
+    return roleMap[userData.roles[0]] || userData.roles[0];
+  }
+
+  /**
+   * Generar iniciales del nombre
+   */
+  getUserInitials(): string {
+    const name = this.getUserName();
+    if (!name) return 'U';
+
+    const words = name.split(' ');
+    if (words.length >= 2) {
+      return (words[0][0] + words[1][0]).toUpperCase();
+    }
+    return name.substring(0, 2).toUpperCase();
+  }
+
+  /**
+   * Obtener todos los roles del usuario
+   */
+  getUserRoles(): string[] {
+    const userData = this.getUserFromToken();
+    return userData?.roles || [];
+  }
+
+  /**
+   * Verificar si el usuario tiene un rol específico
+   */
+  hasRole(role: string): boolean {
+    const roles = this.getUserRoles();
+    return roles.includes(role);
+  }
+
+  // -----------------------------------------------------------------------------------------------------
+  // @ Private methods
+  // -----------------------------------------------------------------------------------------------------
 
   /**
    * Start the timer that will refresh the token 10 seconds before expiration
