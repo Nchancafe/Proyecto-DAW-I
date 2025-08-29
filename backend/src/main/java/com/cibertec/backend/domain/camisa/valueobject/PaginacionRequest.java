@@ -10,7 +10,7 @@ public class PaginacionRequest {
     @Builder.Default
     int tamanio = 10;
     @Builder.Default
-    String ordenarPor = "id";
+    String ordenarPor = "id_camisa";
     @Builder.Default
     String direccion = "asc";
 

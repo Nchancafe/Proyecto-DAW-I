@@ -120,8 +120,18 @@ public class JwtTokenServiceImpl implements TokenService {
         List<String> authorities = extraerClaim(token, claims ->
                 (List<String>) claims.get("roles"));
 
+        // Agrega este log para ver los roles extraídos
+        System.out.println("Roles extraídos del token: " + authorities);
+
+        Collection<GrantedAuthority> grantedAuthorities = authorities.stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                .collect(Collectors.toList());
+
+        // Agrega este log para ver los authorities finales
+        System.out.println("Authorities construidos: " + grantedAuthorities);
+
         return authorities.stream()
-                .map(SimpleGrantedAuthority::new)
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                 .collect(Collectors.toList());
     }
 }

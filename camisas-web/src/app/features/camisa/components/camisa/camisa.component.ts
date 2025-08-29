@@ -41,13 +41,13 @@ export class CamisaComponent implements OnInit {
     const { actual, tamanio } = this.paginacion();
 
     this.service.loadCamisas(actual, tamanio).subscribe({
-      next: ({ data }) => {
-        this.camisas.set(data.contenido);
+      next: (resp) => {
+        this.camisas.set(resp.contenido);
         this.paginacion.set({
-          actual: data.paginaActual,
-          tamanio: data.tamanio,
-          totalElementos: data.totalElementos,
-          totalPaginas: data.totalPaginas
+          actual: resp.paginaActual,
+          tamanio: resp.tamanio,
+          totalElementos: resp.totalElementos,
+          totalPaginas: resp.totalPaginas
         });
       },
       error: (error) => console.error('Error al cargar camisas:', error),
