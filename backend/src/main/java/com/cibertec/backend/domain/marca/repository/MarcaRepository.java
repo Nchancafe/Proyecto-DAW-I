@@ -1,12 +1,10 @@
-package com.cibertec.backend.domain.marca.service;
+package com.cibertec.backend.domain.marca.repository;
 
 import com.cibertec.backend.domain.marca.valueobject.PaginaResult;
 import com.cibertec.backend.domain.marca.valueobject.PaginacionRequest;
 import com.cibertec.backend.domain.marca.model.MarcaModel;
 
-import java.util.List;
-
-public interface MarcaService {
+public interface MarcaRepository {
     PaginaResult<MarcaModel> listarMarcas(PaginacionRequest paginacion);
-}
 
+}

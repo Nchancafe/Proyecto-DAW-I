@@ -9,4 +9,5 @@ import com.cibertec.backend.domain.camisa.valueobject.PaginacionRequest;
 public interface CamisaRepository {
     PaginaResult<CamisaModel> listarCamisas(PaginacionRequest paginacion);
    // CamisaModel crearCamisa(CamisaCreateCommand command, String usuario);
+
 }

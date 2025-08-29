@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 import { of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { ApiResponseCamisa, CamisaCreate, Marca, Estante  } from '../models/camisa.model'; 
+import { ApiResponseCamisa, CamisaCreate, Marca, Estante  } from '../models/camisa.model';
 import { DEFAULT_MARCAS, DEFAULT_ESTANTES } from '../../../core/fallback-data';
 
 @Injectable({ providedIn: 'root' })
