@@ -93,8 +93,7 @@ export class AuthService {
 
     return this._httpClient
       .post(`${this.baseUrl}/public/api/auth/refresh`, {refreshToken: this.refreshToken})
-      .pipe(
-        timeout(10000),
+        .pipe(
         switchMap((response: any) => {
           this.accessToken = response.data.accessToken;
           this.refreshToken = response.data.refreshToken;
