@@ -1,12 +1,13 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { CamisaService } from '../../services/camisa.service';
 import {Camisa} from '../../models/camisa.model';
 
 @Component({
   selector: 'app-camisa',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './camisa.component.html',
   styleUrl: './camisa.component.scss'
 })

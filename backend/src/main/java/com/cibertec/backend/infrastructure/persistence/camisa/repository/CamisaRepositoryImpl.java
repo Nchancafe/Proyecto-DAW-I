@@ -3,8 +3,10 @@ package com.cibertec.backend.infrastructure.persistence.camisa.repository;
 
 import com.cibertec.backend.domain.camisa.model.CamisaModel;
 import com.cibertec.backend.domain.camisa.repository.CamisaRepository;
+import com.cibertec.backend.domain.camisa.valueobject.CamisaCreateCommand;
 import com.cibertec.backend.domain.camisa.valueobject.PaginaResult;
 import com.cibertec.backend.domain.camisa.valueobject.PaginacionRequest;
+import com.cibertec.backend.infrastructure.persistence.camisa.entity.CamisaEntity;
 import com.cibertec.backend.infrastructure.persistence.camisa.jpa.CamisaRepositoryJpa;
 import com.cibertec.backend.infrastructure.persistence.camisa.mapper.CamisaMapper;
 import com.cibertec.backend.infrastructure.persistence.camisa.projection.CamisaProjection;
@@ -21,10 +23,9 @@ public class CamisaRepositoryImpl implements CamisaRepository {
     private final CamisaRepositoryJpa camisaRepositoryJpa;
     private final CamisaMapper camisaMapper;
 
-
     @Override
-    public PaginaResult<CamisaModel> listarCamisas(PaginacionRequest paginacion) {
-        Pageable pageable = createPageable(paginacion);
+    public PaginaResult<CamisaModel> listarCamisas(PaginacionRequest p) {
+        Pageable pageable = createPageable(p);
         Page<CamisaProjection> page = camisaRepositoryJpa.findAllCamisas(pageable);
 
         List<CamisaModel> camisas = page.getContent()
@@ -32,13 +33,15 @@ public class CamisaRepositoryImpl implements CamisaRepository {
                 .map(camisaMapper::projectionMap)
                 .toList();
 
-        return PaginaResult.of(
-                camisas,
-                page.getNumber(),
-                page.getSize(),
-                page.getTotalElements()
-        );
+        return PaginaResult.of(camisas, page.getNumber(), page.getSize(), page.getTotalElements());
     }
+
+//    @Override
+//    public CamisaModel crearCamisa(CamisaCreateCommand command, String usuario) {
+//        CamisaEntity entity = camisaMapper.entityMap(command, usuario);
+//        CamisaEntity saved  = camisaRepositoryJpa.save(entity);
+//        return camisaMapper.map(saved);
+//    }
 
     private Pageable createPageable(PaginacionRequest paginacion) {
         Sort sort = paginacion.isAscendente() ?

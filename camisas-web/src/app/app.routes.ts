@@ -3,6 +3,9 @@ import {MainLayoutComponent} from './layout/components/main-layout/main-layout';
 import {DashboardComponent} from './features/dashboard/dashboard';
 import {AuthGuard} from './core/auth/guards/auth.guard';
 import {CamisaComponent} from './features/camisa/components/camisa/camisa.component';
+import {MarcaComponent} from './features/marca/components/marca/marca.component';
+import {PerfilUsuarioComponent} from './features/perfil-usuario/components/usuario/perfil-usuario.component';
+
 
 export const routes: Routes = [
   {
@@ -13,6 +16,14 @@ export const routes: Routes = [
       {path: '', pathMatch: 'full', redirectTo: 'dashboard'},
       {path: 'dashboard', component: DashboardComponent},
       {path: 'camisa', component: CamisaComponent},
+      { //mapear nueva camisa
+        path: 'camisa',
+        loadChildren: () =>
+          import('./features/camisa/camisa.routes').then(m => m.CAMISA_ROUTES)
+      },
+      { path: 'marca', component: MarcaComponent },
+      {path: 'perfil-usuario', component: PerfilUsuarioComponent, title: 'Mi Perfil'},
+
     ]
   },
   {
