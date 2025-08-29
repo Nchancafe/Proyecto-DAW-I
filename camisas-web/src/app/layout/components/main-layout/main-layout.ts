@@ -48,24 +48,11 @@ export class MainLayoutComponent implements OnInit {
       label: 'Marca',
       path: '/marca',
       icon: 'M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-5.33 0-8 2.67-8 6v2h16v-2c0-3.33-2.67-6-8-6Z'
-    }
-  ]);
-
-  userMenuItems: UserMenuItem[] = [
-    {
-      label: 'Ver Perfil',
-      icon: 'M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-5.33 0-8 2.67-8 6v2h16v-2c0-3.33-2.67-6-8-6Z',
-      route: '/profile'
     },
-    {label: 'Configuración', icon: 'M12 8a4 4 0 1 0 4 4 4 4 0 0 0-4-4Z', route: '/settings', dividerAbove: true},
-    {
-      label: 'Cerrar Sesión',
-      icon: 'M16 13H7v-2h9V8l5 4-5 4v-3Z',
-      danger: true,
-      dividerAbove: true,
-      action: () => this.logout()
-    }
-  ];
+    { label: 'Ver perfil',
+      path: '/perfil-usuario',
+      icon: 'M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-5.33 0-8 2.67-8 6v2h16v-2c0-3.33-2.67-6-8-6Z' }
+  ]);
 
   constructor(
     readonly router: Router,

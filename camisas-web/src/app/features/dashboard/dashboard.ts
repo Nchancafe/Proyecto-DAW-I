@@ -12,7 +12,6 @@ import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
   ],
   template: `
     <div class="p-6">
-      <h1 class="text-2xl font-bold mb-6">Panel de Control - Tienda de Camisetas</h1>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 items-stretch">
 
         <div class="bg-white rounded-lg shadow flex flex-col items-center justify-center h-56">
