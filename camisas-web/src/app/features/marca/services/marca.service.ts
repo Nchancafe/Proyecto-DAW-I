@@ -2,16 +2,18 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { ApiResponseCamisa } from '../models/camisa.model';
+import { ApiResponseMarca } from '../models/marca.model';
 
 @Injectable({ providedIn: 'root' })
-export class CamisaService {
+export class MarcaService {
 
   readonly _httpClient = inject(HttpClient);
   private readonly baseUrl = environment.apiUrl;
 
-  loadCamisas(paginaActual: number, tamanio: number): Observable<ApiResponseCamisa> {
-    return this._httpClient.get<ApiResponseCamisa>(`${this.baseUrl}/api/camisas?pagina=${paginaActual}&tamanio=${tamanio}`);
+  loadMarcas(paginaActual: number, tamanio: number): Observable<ApiResponseMarca> {
+    return this._httpClient.get<ApiResponseMarca>(
+      `${this.baseUrl}/api/marcas?pagina=${paginaActual}&tamanio=${tamanio}`
+    );
   }
 
 }

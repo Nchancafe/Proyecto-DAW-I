@@ -3,6 +3,7 @@ import {MainLayoutComponent} from './layout/components/main-layout/main-layout';
 import {DashboardComponent} from './features/dashboard/dashboard';
 import {AuthGuard} from './core/auth/guards/auth.guard';
 import {CamisaComponent} from './features/camisa/components/camisa/camisa.component';
+import {MarcaComponent} from './features/marca/components/marca/marca.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,7 @@ export const routes: Routes = [
       {path: '', pathMatch: 'full', redirectTo: 'dashboard'},
       {path: 'dashboard', component: DashboardComponent},
       {path: 'camisa', component: CamisaComponent},
+      { path: 'marca', component: MarcaComponent },
     ]
   },
   {

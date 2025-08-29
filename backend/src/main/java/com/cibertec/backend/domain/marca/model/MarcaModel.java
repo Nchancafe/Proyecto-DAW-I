@@ -1,10 +1,10 @@
-package com.cibertec.backend.domain.organizacion.model;
+package com.cibertec.backend.domain.marca.model;
 
 import lombok.Data;
 
 @Data
 public class MarcaModel {
-    private Long marcaId;
+    private Long id;
     private String descripcion;
     private Boolean estado;
 }
