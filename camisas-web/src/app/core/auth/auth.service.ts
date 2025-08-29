@@ -47,7 +47,7 @@ export class AuthService {
    * @param credentials
    */
 
-  signIn(credentials: { username: string; password: string }): Observable<any> {
+   signIn(credentials: { username: string; password: string }): Observable<any> {
   if (this._authenticated) {
     return throwError(() => new Error('El usuario ya ha iniciado sesión.'));
   }
@@ -55,6 +55,7 @@ export class AuthService {
   return this._httpClient
   .post(`${this.baseUrl}/public/api/auth/login`, credentials)
   .pipe(
+    timeout(10000), //si la petición no responde en 10 segundos, se debe cancelar automáticamente y dar un error de tipo timeout
     switchMap((response: any) => {
       // Soportar diferentes nombres de campos
       const tokens = response.data ?? response;
@@ -84,10 +85,10 @@ export class AuthService {
 }
 
   /**
-   * Refrescar el token
+   * Refresh the access token using the refresh token
    */
   refreshAccessToken(): Observable<any> {
- 
+    // If no refresh token is available, we cannot refresh the access token
     if (!this.refreshToken) {
       return throwError(() => new Error('Refresh token no disponible'));
     }
@@ -95,7 +96,6 @@ export class AuthService {
     return this._httpClient
       .post(`${this.baseUrl}/public/api/auth/refresh`, {refreshToken: this.refreshToken})
       .pipe(
-        timeout(10000),
         switchMap((response: any) => {
           this.accessToken = response.data.accessToken;
           this.refreshToken = response.data.refreshToken;
@@ -109,10 +109,11 @@ export class AuthService {
    * Sign out
    */
   signOut(): Observable<any> {
+    // Remove the access token and refresh token from local storage
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
 
-    // Setear autenticacion a false
+    // Set the authenticated flag to false
     this._authenticated = false;
     if (this.refreshTimer) {
       clearTimeout(this.refreshTimer);
@@ -122,7 +123,7 @@ export class AuthService {
   }
 
   /**
-   * Checkear el status de la autenticacion
+   * Check the authentication status
    */
   check(): Observable<boolean> {
     // Check if the user is logged in
@@ -130,7 +131,7 @@ export class AuthService {
       return of(true);
     }
 
-    // Checkear si el token expiro
+    // Check if the access token is expired
     if (AuthUtils.isTokenExpired(this.accessToken, 10)) {
       return this.refreshAccessToken().pipe(
         switchMap(() => of(true)),
@@ -138,6 +139,7 @@ export class AuthService {
       );
     }
 
+    // Check if the access token exists and is valid
     if (!this.accessToken) {
       return of(false);
     }
@@ -146,7 +148,7 @@ export class AuthService {
   }
 
   /**
-   * Empezar el timer que refrescará el token 10 seg antes de que expire
+   * Start the timer that will refresh the token 10 seconds before expiration
    */
   private startTokenRefreshTimer(): void {
     if (this.refreshTimer) {

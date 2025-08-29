@@ -3,7 +3,11 @@ spring:
     url: jdbc:mysql://localhost:3306/bd_palaciocamisas?serverTimezone=America/Lima&allowPublicKeyRetrieval=true&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
+<<<<<<< HEAD
     password: admin
+=======
+    password: amtyandrea  
+>>>>>>> astrid
     hikari:
       maximum-pool-size: 10         # Numero maximo de conexiones en el pool
       minimum-idle: 4               # Minimo de conexiones inactivas
