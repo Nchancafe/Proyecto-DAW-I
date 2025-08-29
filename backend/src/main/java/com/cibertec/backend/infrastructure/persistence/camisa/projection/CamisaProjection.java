@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public interface CamisaProjection {
 
-    Long getId();
+    Long getIdCamisa();
 
     String getDescripcion();
 

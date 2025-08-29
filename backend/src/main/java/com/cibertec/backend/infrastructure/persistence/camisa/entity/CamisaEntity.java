@@ -17,6 +17,7 @@ public class CamisaEntity extends Auditoria<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_camisa")
     private Long id;
 
     @Column(length = 45, nullable = false)
