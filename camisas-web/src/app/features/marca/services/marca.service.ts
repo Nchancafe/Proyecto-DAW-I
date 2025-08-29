@@ -1,19 +1,29 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { ApiResponseMarca } from '../models/marca.model';
+import { Observable } from 'rxjs';
+import { Marca } from '../models/marca.model';
+
+export interface PaginaResult<T> {
+  contenido: T[];
+  paginaActual: number;
+  tamanio: number;
+  totalElementos: number;
+  totalPaginas: number;
+  primera: boolean;
+  ultima: boolean;
+  vacia: boolean;
+}
 
 @Injectable({ providedIn: 'root' })
 export class MarcaService {
-
-  readonly _httpClient = inject(HttpClient);
   private readonly baseUrl = environment.apiUrl;
 
-  loadMarcas(paginaActual: number, tamanio: number): Observable<ApiResponseMarca> {
-    return this._httpClient.get<ApiResponseMarca>(
-      `${this.baseUrl}/api/marcas?pagina=${paginaActual}&tamanio=${tamanio}`
+  constructor(private http: HttpClient) {}
+
+  getMarcas(pagina = 0, tamanio = 10): Observable<PaginaResult<Marca>> {
+    return this.http.get<PaginaResult<Marca>>(
+      `${this.baseUrl}/api/marcas?pagina=${pagina}&tamanio=${tamanio}`
     );
   }
-
 }

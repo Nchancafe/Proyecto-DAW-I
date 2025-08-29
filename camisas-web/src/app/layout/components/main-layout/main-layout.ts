@@ -48,10 +48,7 @@ export class MainLayoutComponent implements OnInit {
       label: 'Marca',
       path: '/marca',
       icon: 'M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-5.33 0-8 2.67-8 6v2h16v-2c0-3.33-2.67-6-8-6Z'
-    },
-    { label: 'Ver perfil',
-      path: '/perfil-usuario',
-      icon: 'M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-5.33 0-8 2.67-8 6v2h16v-2c0-3.33-2.67-6-8-6Z' }
+    }
   ]);
 
   constructor(

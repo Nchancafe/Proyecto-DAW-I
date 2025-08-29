@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-gray-50">
   <div class="container mx-auto p-6">
-    <!-- Header -->
+
     <div class="mb-8">
       <div class="flex items-center justify-between">
         <div>
@@ -15,85 +15,76 @@
       </div>
     </div>
 
-    <!-- Loading State -->
-    @if (loading()) {
-      <div class="flex justify-center items-center py-16">
-        <div class="animate-spin rounded-full h-8 w-8 border-2 border-gray-300 border-t-gray-900"></div>
-      </div>
-    }
 
-    <!-- Marcas List -->
-    @if (!loading()) {
-      <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
-        <!-- Header Row -->
-        <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
-          <div class="grid grid-cols-12 gap-4 items-center">
-            <div class="col-span-8 text-gray-700 font-medium text-sm">Descripción</div>
-            <div class="col-span-2 text-gray-700 font-medium text-sm">Estado</div>
-            <div class="col-span-2 text-gray-700 font-medium text-sm text-right">Acciones</div>
-          </div>
+    <div *ngIf="loading" class="flex justify-center items-center py-16">
+      <div class="animate-spin rounded-full h-8 w-8 border-2 border-gray-300 border-t-gray-900"></div>
+    </div>
+
+
+    <div *ngIf="!loading" class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <!-- Header Row -->
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+        <div class="grid grid-cols-12 gap-4 items-center">
+          <div class="col-span-8 text-gray-700 font-medium text-sm">Nombre</div>
+          <div class="col-span-2 text-gray-700 font-medium text-sm">Estado</div>
+          <div class="col-span-2 text-gray-700 font-medium text-sm text-right">Acciones</div>
         </div>
+      </div>
 
-        <!-- Marca Rows -->
-        @for (marca of marcas(); track trackByMarcaId) {
-          <div class="px-6 py-4 border-b border-gray-100 hover:bg-gray-50 transition-colors group">
-            <div class="grid grid-cols-12 gap-4 items-center">
-              <div class="col-span-8">
-                <div class="text-gray-900 font-medium truncate">{{ marca.descripcion }}</div>
-              </div>
-              <div class="col-span-2">
-                <div class="text-sm font-medium" [ngClass]="marca.estado === 'Activo' ? 'text-green-600' : 'text-red-600'">
-                  {{ marca.estado }}
-                </div>
-              </div>
-              <div class="col-span-2 text-right">
-                <button class="text-gray-900 hover:text-gray-700 font-medium text-sm transition-colors">
-                  Editar
-                </button>
-              </div>
+
+      <div *ngFor="let marca of marcas; trackBy: trackByMarcaId" class="px-6 py-4 border-b border-gray-100 hover:bg-gray-50 transition-colors group">
+        <div class="grid grid-cols-12 gap-4 items-center">
+          <div class="col-span-8">
+            <div class="text-gray-900 font-medium truncate">{{ marca.descripcion }}</div>
+          </div>
+          <div class="col-span-2">
+            <div class="text-sm font-medium" [ngClass]="marca.estado ? 'text-green-600' : 'text-red-600'">
+              {{ marca.estado ? 'Activo' : 'Inactivo' }}
             </div>
           </div>
-        }
-      </div>
-    }
-
-    <!-- Pagination -->
-    @if (!loading()) {
-      <div class="mt-6 flex items-center justify-between">
-        <div class="flex items-center text-sm text-gray-500">
-          <span>Mostrando {{ (paginacion().actual * paginacion().tamanio) + 1 }}
-            a {{ Math.min((paginacion().actual + 1) * paginacion().tamanio, paginacion().totalElementos) }}
-            de {{ paginacion().totalElementos }}
-            resultados</span>
-        </div>
-
-        <div class="flex items-center space-x-2">
-          <button (click)="cambiarPagina(paginacion().actual - 1)"
-                  [disabled]="paginacion().actual === 0 || loading()"
-                  class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-            Anterior
-          </button>
-
-          <div class="flex space-x-1">
-            @for (pagina of paginasVisibles(); track trackByPagina) {
-              <button
-                (click)="cambiarPagina(pagina)"
-                [disabled]="loading()"
-                [class]="pagina === paginacion().actual ?
-                        'px-3 py-2 text-sm font-medium text-white bg-gray-900 border border-gray-900 rounded' :
-                        'px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 border border-gray-300 rounded hover:bg-gray-50 transition-colors'">
-                {{ pagina + 1 }}
-              </button>
-            }
+          <div class="col-span-2 text-right">
+            <button class="text-gray-900 hover:text-gray-700 font-medium text-sm transition-colors">
+              Editar
+            </button>
           </div>
-
-          <button (click)="cambiarPagina(paginacion().actual + 1)"
-                  [disabled]="paginacion().actual >= paginacion().totalPaginas - 1 || loading()"
-                  class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-            Siguiente
-          </button>
         </div>
       </div>
-    }
+    </div>
+
+
+    <div *ngIf="!loading" class="mt-6 flex items-center justify-between">
+      <div class="flex items-center text-sm text-gray-500">
+        <span>
+          Mostrando {{ (paginacion.actual * paginacion.tamanio) + 1 }}
+          a {{ Math.min((paginacion.actual + 1) * paginacion.tamanio, paginacion.totalElementos) }}
+          de {{ paginacion.totalElementos }} resultados
+        </span>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <button (click)="cambiarPagina(paginacion.actual - 1)"
+                [disabled]="paginacion.actual === 0 || loading"
+                class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+          Anterior
+        </button>
+
+        <div class="flex space-x-1">
+          <button *ngFor="let pagina of paginasVisibles(); trackBy: trackByPagina"
+                  (click)="cambiarPagina(pagina)"
+                  [disabled]="loading"
+                  [ngClass]="pagina === paginacion.actual ?
+                    'px-3 py-2 text-sm font-medium text-white bg-gray-900 border border-gray-900 rounded' :
+                    'px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 border border-gray-300 rounded hover:bg-gray-50 transition-colors'">
+            {{ pagina + 1 }}
+          </button>
+        </div>
+
+        <button (click)="cambiarPagina(paginacion.actual + 1)"
+                [disabled]="paginacion.actual >= paginacion.totalPaginas - 1 || loading"
+                class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+          Siguiente
+        </button>
+      </div>
+    </div>
   </div>
 </div>

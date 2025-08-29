@@ -4,7 +4,6 @@ import com.cibertec.backend.domain.marca.valueobject.PaginaResult;
 import com.cibertec.backend.domain.marca.valueobject.PaginacionRequest;
 import com.cibertec.backend.domain.marca.model.MarcaModel;
 
-import java.util.List;
 
 public interface MarcaService {
     PaginaResult<MarcaModel> listarMarcas(PaginacionRequest paginacion);

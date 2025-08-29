@@ -1,69 +1,77 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MarcaService } from '../../services/marca.service';
+import { Component, OnInit } from '@angular/core';
+import { MarcaService, PaginaResult } from '../../services/marca.service';
 import { Marca } from '../../models/marca.model';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-marca',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './marca.component.html',
-  styleUrl: './marca.component.scss'
+  imports: [
+    NgClass,
+    NgForOf,
+    NgIf
+  ],
+  templateUrl: './marca.component.html'
 })
 export class MarcaComponent implements OnInit {
-  Math = Math;
+  marcas: Marca[] = [];
+  loading = false;
 
-  readonly service = inject(MarcaService);
-
-  marcas = signal<Marca[]>([]);
-  loading = signal(false);
-  paginacion = signal({
+  paginacion = {
     actual: 0,
     tamanio: 10,
     totalElementos: 0,
     totalPaginas: 0
-  });
+  };
 
-  paginasVisibles = computed(() => {
-    const { actual, totalPaginas } = this.paginacion();
-    const maxPaginas = 5;
-    const inicio = Math.max(0, actual - Math.floor(maxPaginas / 2));
-    const fin = Math.min(totalPaginas - 1, inicio + maxPaginas - 1);
-    return Array.from({ length: fin - inicio + 1 }, (_, i) => inicio + i);
-  });
+  constructor(private marcaService: MarcaService) {}
 
   ngOnInit() {
     this.cargarMarcas();
   }
 
-  cargarMarcas() {
-    this.loading.set(true);
-    const { actual, tamanio } = this.paginacion();
-
-    this.service.loadMarcas(actual, tamanio).subscribe({
-      next: (resp) => {
-        this.marcas.set(resp.contenido);
-        this.paginacion.set({
-          actual: resp.paginaActual,
-          tamanio: resp.tamanio,
-          totalElementos: resp.totalElementos,
-          totalPaginas: resp.totalPaginas
-        });
+  cargarMarcas(pagina = 0) {
+    this.loading = true;
+    this.marcaService.getMarcas(pagina, this.paginacion.tamanio).subscribe({
+      next: result => {
+        this.marcas = result.contenido;
+        this.paginacion.actual = result.paginaActual;
+        this.paginacion.tamanio = result.tamanio;
+        this.paginacion.totalElementos = result.totalElementos;
+        this.paginacion.totalPaginas = result.totalPaginas;
+        this.loading = false;
       },
-      error: (error) => console.error('Error al cargar marcas:', error),
-      complete: () => this.loading.set(false)
+      error: () => {
+        this.loading = false;
+      }
     });
   }
 
-  cambiarPagina(nuevaPagina: number) {
-    const { totalPaginas } = this.paginacion();
-    if (nuevaPagina >= 0 && nuevaPagina < totalPaginas && !this.loading()) {
-      this.paginacion.update(p => ({ ...p, actual: nuevaPagina }));
-      this.cargarMarcas();
+  cambiarPagina(pagina: number) {
+    if (pagina >= 0 && pagina < this.paginacion.totalPaginas && !this.loading) {
+      this.cargarMarcas(pagina);
     }
   }
 
-  // TrackBy
-  trackByMarcaId = (_: number, marca: Marca) => marca.id;
-  trackByPagina = (_: number, pagina: number) => pagina;
+  paginasVisibles(): number[] {
+    const total = this.paginacion.totalPaginas;
+    const actual = this.paginacion.actual;
+    const delta = 2;
+    const paginas: number[] = [];
+    const start = Math.max(0, actual - delta);
+    const end = Math.min(total, actual + delta + 1);
+    for (let i = start; i < end; i++) {
+      paginas.push(i);
+    }
+    return paginas;
+  }
+
+  trackByMarcaId(index: number, marca: Marca) {
+    return marca.id;
+  }
+
+  trackByPagina(index: number, pagina: number) {
+    return pagina;
+  }
+
+  protected readonly Math = Math;
 }

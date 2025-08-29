@@ -6,11 +6,12 @@ import lombok.*;
 public class MarcaModel {
 
     @Id
+    @Column(name = "id_marca")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 80)
-    private String nombre;
+    private String descripcion;
 
     @Column(nullable = false)
     private boolean estado = true;
