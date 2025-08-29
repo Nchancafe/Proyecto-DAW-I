@@ -49,4 +49,5 @@ public class CamisaEntity extends Auditoria<String> {
 
     @Column(nullable = false)
     private Boolean estado;
+
 }
