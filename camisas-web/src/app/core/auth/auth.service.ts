@@ -54,6 +54,7 @@ export class AuthService {
   return this._httpClient
   .post(`${this.baseUrl}/public/api/auth/login`, credentials)
   .pipe(
+    timeout(10000), //devolver error si el serv no responde en 10 seg
     switchMap((response: any) => {
       // Soportar diferentes nombres de campos
       const tokens = response.data ?? response;
@@ -72,12 +73,20 @@ export class AuthService {
       return of(tokens); 
     }),
     catchError((err: HttpErrorResponse) => {
-        const backendMsg =
-          (err.error && (err.error.message || err.error.error)) ||
-          (typeof err.error === 'string' ? err.error : null);
+           // manejamos estados
+      if (err.status === 0) {
+        return throwError(() => new Error('No hay conexión con el servidor'));
+      }
+      if (err.status === 401 || 403) {
+        return throwError(() => new Error('Credenciales inválidas'));
+      }
 
-        const msg = backendMsg || 'Autenticación fallida';
-        return throwError(() => new Error(msg));
+      const backendMsg =
+        (err.error && (err.error.message || err.error.error)) ||
+        (typeof err.error === 'string' ? err.error : null);
+
+      const msg = backendMsg || 'Autenticación fallida';
+      return throwError(() => new Error(msg));
       })
   );
 }

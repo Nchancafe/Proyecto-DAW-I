@@ -52,7 +52,13 @@ export class Login {
             (err && (err.message || err.error?.message || err.error?.error)) ||
             'No se pudo iniciar sesión';
           this.cdr.markForCheck(); 
+
+            setTimeout(() => {
+            this.error = null;
+            this.cdr.markForCheck();
+            }, 4000); //a los 4 segundos se va el mensaje 
         }
+
       });
   }
 }

@@ -13,6 +13,11 @@ export const routes: Routes = [
       {path: '', pathMatch: 'full', redirectTo: 'dashboard'},
       {path: 'dashboard', component: DashboardComponent},
       {path: 'camisa', component: CamisaComponent},
+      { //mapear nueva camisa
+        path: 'camisa',
+        loadChildren: () =>
+          import('./features/camisa/camisa.routes').then(m => m.CAMISA_ROUTES)
+      },
     ]
   },
   {
