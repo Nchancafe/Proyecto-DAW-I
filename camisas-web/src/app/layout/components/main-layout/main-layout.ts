@@ -1,7 +1,8 @@
 import {
   Component,
   HostListener,
-  signal
+  signal,
+  OnInit
 } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router, RouterModule} from '@angular/router';
@@ -28,9 +29,13 @@ interface UserMenuItem {
   imports: [CommonModule, RouterModule],
   templateUrl: './main-layout.html'
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements OnInit {
   sidebarOpen = signal(false);
   userMenuOpen = signal(false);
+
+  userName: string = '';
+  userRole: string = '';
+  userInitials: string = '';
 
   navItems = signal<NavItem[]>([
     {label: 'Dashboard', path: '/dashboard', icon: 'M3 12l2-2 4 4L21 4l2 2L9 20 3 14z'},
@@ -90,7 +95,9 @@ export class MainLayoutComponent {
     const success = this.authService.signOut();
     if (success) {
       console.log('Sesión cerrada exitosamente');
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/auth/login']).then(()=>{
+        window.location.reload();
+      });
     } else {
       console.error('Error al cerrar sesión');
     }
@@ -104,4 +111,9 @@ export class MainLayoutComponent {
     }
   }
 
+  ngOnInit(): void {
+    this.userName = this.authService.getUserName();
+    this.userRole = this.authService.getUserRole();
+    this.userInitials = this.authService.getUserInitials();
+  }
 }
