@@ -8,20 +8,20 @@ Incluye un **frontend moderno**, un **backend ** y una **base de datos relaciona
 
 ## 🛠️ Tecnologías utilizadas
 - 🎨 **Frontend**: Angular + Tailwind CSS (IDE: WebStorm)  
-- ⚙️ **Backend**: .NET Core (IDE: IntelliJ IDEA)  
+- ⚙️ **Backend**: Java Spring Boot (IDE: IntelliJ IDEA)  
 - 🗄️ **Base de datos**: MySQL (script `BD_CAMISAS.sql` exportado desde MySQL Workbench)  
 
 ---
 
 ## 📂 Estructura del proyecto
 
+```
 Proyecto-DAW-I/
 │
 ├── camisas-web/ # Frontend (Angular + Tailwind)
-├── backend/ # API REST (ASP.NET Core)
-└── database/
+├── backend/ # API REST (Java Spring Boot)
 └── BD_CAMISAS.sql # Script SQL para crear la base de datos
-
+```
 
 ---
 
@@ -29,18 +29,19 @@ Proyecto-DAW-I/
 
 ### 1️⃣ Clonar el repositorio
 ```bash
-git clone https://github.com/usuario/Proyecto-DAW-I.git
-cd Proyecto-DAW-I
+git clone https://github.com/Nchancafe/Proyecto-DAW-I.git
 ```
 
 - Configurar la base de datos
 
 Crear la base de datos en MySQL.
-
+```bash
+CREATE DATABASE bd_palaciocamisas;
+```
 ## 2️⃣ Importar el script:
-
-mysql -u root -p bd_camisas < database/BD_CAMISAS.sql
-
+```bash
+mysql -u root -p bd_palaciocamisas < BD_CAMISAS.sql
+```
 👥 Integrantes del equipo
 
 👩‍💻 Astrid Marjorie Timana Yupari
