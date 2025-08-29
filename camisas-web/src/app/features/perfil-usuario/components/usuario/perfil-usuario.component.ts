@@ -23,9 +23,7 @@ import { Router } from '@angular/router';
           </div>
         } @else if (usuario()) {
           <div class="text-center">
-            <span class="inline-flex items-center justify-center h-24 w-24 rounded-full bg-gray-900 text-white text-4xl font-semibold">
-              {{ getUserInitials(usuario()!.nombre, usuario()!.apellido) }}
-            </span>
+            <img [src]="userImageUrl()" alt="Foto de perfil del usuario" class="mx-auto h-24 w-24 rounded-full object-cover mb-4 border-4 border-white shadow-md"/>
             <h1 class="text-3xl font-bold mt-4">{{ usuario()!.nombre }} {{ usuario()!.apellido }}</h1>
             <p class="text-gray-500 mt-2">{{ usuario()!.email }}</p>
 
@@ -71,6 +69,7 @@ export class PerfilUsuarioComponent implements OnInit {
   isLoading = signal<boolean>(true);
   error = signal<string | null>(null);
   usuario = signal<UsuarioDTO | null>(null);
+  userImageUrl = signal<string>('');
 
   constructor(
     private usuarioService: UsuarioService,
@@ -83,6 +82,7 @@ export class PerfilUsuarioComponent implements OnInit {
       next: (data) => {
         this.usuario.set(data);
         this.isLoading.set(false);
+        this.setProfileImage(data.id);
       },
       error: (err) => {
         console.error('Error al obtener el perfil:', err);
@@ -99,8 +99,32 @@ export class PerfilUsuarioComponent implements OnInit {
     return `${nombreInicial}${apellidoInicial}`;
   }
 
+  /// Método para asignar la imagen según el ID
+  setProfileImage(userId: number): void {
+    switch (userId) {
+      case 1:
+        this.userImageUrl.set('images/imagen1.jpg');
+        break;
+      case 2:
+        this.userImageUrl.set('images/imagen2.jpg');
+        break;
+      case 3:
+        this.userImageUrl.set('images/imagen3.jpg');
+        break;
+      case 4:
+        this.userImageUrl.set('images/imagen4.jpg');
+        break;
+      default:
+        // Una imagen por defecto para cualquier otro usuario
+        this.userImageUrl.set('images/hombre.png');
+        break;
+    }
+  }
+
+
   // Método para volver a la página principal
   goBack(): void {
     this.router.navigate(['/dashboard']);
   }
 }
+
